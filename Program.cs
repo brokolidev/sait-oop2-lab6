@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.IO;
+using System.Text;
+using System.Text.Json;
 
 namespace Lab6
 {
@@ -74,6 +76,42 @@ namespace Lab6
             {
                 Console.WriteLine(item);
             }
+
+            // set a path to save file
+            string filePath = $"{rootPath}/hackaton.txt";
+
+            // call ReadFromFile function
+            ReadFromFile(filePath);
+        }
+
+        public static void ReadFromFile(string filePath)
+        {
+            // use stream writer to write text into a file
+            using (StreamWriter sw = new StreamWriter(filePath))
+            {
+                sw.WriteLine("Hackathon");
+            }
+
+
+            // use file stream to get contents from saved file
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                Console.WriteLine("\nTech Competition");
+                Console.WriteLine("In Word: Hackathon");
+                
+                // Read from the beginning
+                Console.Write($"The First Character is: {(char)fs.ReadByte()}\n");
+
+                // change position to middle
+                fs.Seek((fs.Length / 2) - 1, SeekOrigin.Begin);
+                Console.Write($"The Middle Character is: {(char)fs.ReadByte()}\n");
+
+                // change position to the last
+                fs.Seek(-3, SeekOrigin.End);
+                Console.Write($"The Last Character is: {(char)fs.ReadByte()}\n");
+            }
+
+
         }
     }
 }
