@@ -21,7 +21,8 @@ namespace Lab6
         // Overriding ToString method to print out instance information of this class
         public override string ToString()
         {
-            return $"Number of this event : {EventNumber} / Location : {Location}";
+            return $"{EventNumber}\n" +
+                $"{Location}";
         }
     }
 }

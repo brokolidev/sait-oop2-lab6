@@ -39,23 +39,23 @@ namespace Lab6
             // create a list that contains 4 event objects
             List<Event> events = [new Event()
             {
+                EventNumber = 1,
+                Location = "Calgary",
+            },
+            new Event()
+            {
                 EventNumber = 2,
-                Location = "Seoul",
+                Location = "Vancouver",
             },
             new Event()
             {
                 EventNumber = 3,
-                Location = "Edmonton",
-            },
-            new Event()
-            {
-                EventNumber = 4,
                 Location = "Toronto",
             },
             new Event()
             {
-                EventNumber = 5,
-                Location = "Vancouver",
+                EventNumber = 4,
+                Location = "Edmonton",
             }];
 
 
@@ -71,10 +71,10 @@ namespace Lab6
             List<Event> eventsFromJson = JsonSerializer.Deserialize<List<Event>>(jsonObject);
 
             // print out parsed events list
-            Console.WriteLine("\nObject in the parsed events list :");
+            Console.WriteLine("Tech Competition");
             foreach (var item in eventsFromJson)
             {
-                Console.WriteLine(item);
+                Console.WriteLine($"{item.EventNumber} {item.Location}");
             }
 
             // set a path to save file
@@ -86,18 +86,17 @@ namespace Lab6
 
         public static void ReadFromFile(string filePath)
         {
+            string targetWord = "Hackathon";
             // use stream writer to write text into a file
             using (StreamWriter sw = new StreamWriter(filePath))
             {
-                sw.WriteLine("Hackathon");
+                sw.WriteLine(targetWord);
             }
-
 
             // use file stream to get contents from saved file
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
-                Console.WriteLine("\nTech Competition");
-                Console.WriteLine("In Word: Hackathon");
+                Console.WriteLine($"In Word: {targetWord}");
                 
                 // Read from the beginning
                 Console.Write($"The First Character is: {(char)fs.ReadByte()}\n");
@@ -108,7 +107,7 @@ namespace Lab6
 
                 // change position to the last
                 fs.Seek(-3, SeekOrigin.End);
-                Console.Write($"The Last Character is: {(char)fs.ReadByte()}\n");
+                Console.Write($"The Last Character is: {(char)fs.ReadByte()}");
             }
 
 
